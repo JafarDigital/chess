@@ -1,0 +1,99 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chess Game</h1>
+    <div class="form-group">
+        <label for="time-limit">Time Limit (minutes):</label>
+        <input type="number" id="time-limit" min="1" max="60" value="10">
+    </div>
+    <button id="create-game">Create New Game</button>
+    
+    <div id="game-link" class="result">
+        <h2>Invite Link</h2>
+        <p>Share this link with your opponent to start the game:</p>
+        <input type="text" id="invite-link" readonly>
+        <button id="copy-link">Copy Link</button>
+        <p>
+            <a id="join-link" href="#">Or click here to join your own game</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('create-game').addEventListener('click', async () => {
+            const timeLimit = document.getElementById('time-limit').value;
+            
+            try {
+                const response = await fetch('/api/games', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        time_limit_minutes: parseInt(timeLimit)
+                    }),
+                });
+                
+                const data = await response.json();
+                const gameUrl = `${window.location.origin}/game/${data.game_id}`;
+                
+                document.getElementById('invite-link').value = gameUrl;
+                document.getElementById('join-link').href = gameUrl;
+                document.getElementById('game-link').style.display = 'block';
+            } catch (error) {
+                console.error('Error creating game:', error);
+                alert('Failed to create game. Please try again.');
+            }
+        });
+        
+        document.getElementById('copy-link').addEventListener('click', () => {
+            const inviteLink = document.getElementById('invite-link');
+            inviteLink.select();
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
+        });
+    </script>
+</body>
+</html>

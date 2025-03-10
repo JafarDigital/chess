@@ -1,0 +1,6 @@
+/* This file is not strictly necessary as we've included the styles in the HTML template,
+   but for larger projects it's good practice to have it in a separate CSS file */
+
+.chess-board {
+    
+}
