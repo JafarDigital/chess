@@ -1,7 +1,7 @@
 # WebSockets Multiplayer Chess Game
 
 ## • Description
-This project is a simple multiplayer chess game built using FastAPI and WebSockets. It allows two players to play chess against each other in real-time, providing essential chess functionalities such as valid moves enforcement, checkmate detection, castling, and en passant.
+This project is a simple multiplayer chess game built using FastAPI and WebSockets. It allows two players to play chess against each other in real-time, providing the essential chess functionalities such as valid moves enforcement, checkmate detection, and special chess moves like castling and en passant.
 
 ## • Tech Stack
 
@@ -17,7 +17,7 @@ This project is a simple multiplayer chess game built using FastAPI and WebSocke
 
   Unique session-based game URLs
 
-  Valid chess move detection (including special moves castling and en passant)
+  Valid chess move detection (including the special moves castling and en passant)
 
   Game clock functionality
 
@@ -42,10 +42,10 @@ Have fun.
 
 ## • Suggestions for Improvement
 
-Record moves in database
+Record moves and match history in database
 
 Add user authentication and profiles
 
-Add chess Engine to analyse positions: Stockfish [open-source], Lc0 (Leela Chess Zero), Komodo, etc
+Add chess Engine to analyse positions: Stockfish [open-source], Lc0 (Leela Chess Zero), Komodo, etc are one of the best.
 
 Feel free to fork, enhance, and contribute!
